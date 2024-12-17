@@ -17,13 +17,13 @@ interface MatakuliahDao {
     fun getAllMk() : Flow<List<Matakuliah>>
 
     @Insert
-    suspend fun insertMk(matakuliah: Matakuliah)
+    suspend fun insertMatakuliah(matakuliah: Matakuliah)
 
     @Update
-    suspend fun updateMk (matakuliah: Matakuliah)
+    suspend fun updateMatakuliah (matakuliah: Matakuliah)
 
     @Delete
-    suspend fun deleteMk (matakuliah: Matakuliah)
+    suspend fun deleteMatakuliah (matakuliah: Matakuliah)
 
     @Query("select * from matakuliah where kodeMK = :kodeMk")
     fun getMk (kodeMk: String) : Flow<Matakuliah>
