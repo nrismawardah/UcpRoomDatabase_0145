@@ -2,6 +2,20 @@ package com.example.ucp2pam.ui.viewmodel.matakuliah
 
 import com.example.ucp2pam.data.entity.Matakuliah
 
+data class FormErrorStateMk(
+    val kodeMk: String? = null,
+    val namaMK: String? = null,
+    val sksMK: String? = null,
+    val semesterMK: String? = null,
+    val jenisMK: String? = null,
+    val dosenMK: String? = null
+){
+    fun isValid(): Boolean{
+        return kodeMk == null && namaMK == null && sksMK == null &&
+                semesterMK == null && jenisMK == null && dosenMK == null
+    }
+}
+
 fun MatakuliahEvent.toMatakuliahEntity(): Matakuliah = Matakuliah(
     kodeMK = kodeMK,
     namaMK = namaMK,
