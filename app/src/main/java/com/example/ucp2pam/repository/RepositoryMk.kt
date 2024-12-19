@@ -3,7 +3,7 @@ package com.example.ucp2pam.repository
 import com.example.ucp2pam.data.entity.Matakuliah
 import kotlinx.coroutines.flow.Flow
 
-interface RepositoyMk {
+interface RepositoryMk {
 
     fun getAllMk() : Flow<List<Matakuliah>>
 

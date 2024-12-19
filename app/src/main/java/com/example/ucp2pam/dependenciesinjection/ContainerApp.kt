@@ -5,11 +5,11 @@ import com.example.ucp2pam.data.database.AppDatabase
 import com.example.ucp2pam.repository.LocalRepositoryDosen
 import com.example.ucp2pam.repository.LocalRepositoryMk
 import com.example.ucp2pam.repository.RepositoryDosen
-import com.example.ucp2pam.repository.RepositoyMk
+import com.example.ucp2pam.repository.RepositoryMk
 
 interface InterfaceContainerApp {
     val repositoryDosen: RepositoryDosen
-    val repositoyMk: RepositoyMk
+    val repositoryMk: RepositoryMk
 }
 
 class ContainerApp(private val context: Context) : InterfaceContainerApp {
@@ -18,7 +18,7 @@ class ContainerApp(private val context: Context) : InterfaceContainerApp {
         LocalRepositoryDosen(AppDatabase.getDatabase(context).dosenDao())
     }
 
-    override val repositoyMk: RepositoyMk by lazy {
+    override val repositoryMk: RepositoryMk by lazy {
         LocalRepositoryMk(AppDatabase.getDatabase(context).matakuliahDao())
     }
 }

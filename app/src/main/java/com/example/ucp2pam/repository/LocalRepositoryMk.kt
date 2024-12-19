@@ -1,14 +1,12 @@
 package com.example.ucp2pam.repository
 
-import com.example.ucp2pam.data.dao.DosenDao
 import com.example.ucp2pam.data.dao.MatakuliahDao
-import com.example.ucp2pam.data.entity.Dosen
 import com.example.ucp2pam.data.entity.Matakuliah
 import kotlinx.coroutines.flow.Flow
 
 class LocalRepositoryMk (
     private val matakuliahDao: MatakuliahDao
-) : RepositoyMk {
+) : RepositoryMk {
 
     override fun getAllMk(): Flow<List<Matakuliah>> {
         return matakuliahDao.getAllMk()
