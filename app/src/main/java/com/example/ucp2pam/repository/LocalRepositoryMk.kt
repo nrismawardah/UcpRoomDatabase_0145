@@ -6,22 +6,9 @@ import com.example.ucp2pam.data.entity.Dosen
 import com.example.ucp2pam.data.entity.Matakuliah
 import kotlinx.coroutines.flow.Flow
 
-class LocalRepository (
-    private val dosenDao: DosenDao,
+class LocalRepositoryMk (
     private val matakuliahDao: MatakuliahDao
-) : RepositoryDosen, RepositoyMk {
-
-    // Implementasi untuk RepositoyDosen
-
-    override fun getAllDosen(): Flow<List<Dosen>> {
-        return dosenDao.getAllDosen()
-    }
-
-    override suspend fun insertDs(dosen: Dosen) {
-        dosenDao.insertDosen(dosen)
-    }
-
-    // Implementasi untuk RepositoyMk
+) : RepositoyMk {
 
     override fun getAllMk(): Flow<List<Matakuliah>> {
         return matakuliahDao.getAllMk()
