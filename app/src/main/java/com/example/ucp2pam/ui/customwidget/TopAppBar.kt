@@ -4,8 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -29,45 +31,33 @@ fun TopAppBar(
     showBackButton: Boolean = true,
     judul: String,
     modifier: Modifier = Modifier
-){
-    Column (
-        modifier = Modifier
+) {
+    Box(
+        modifier = modifier
             .fillMaxWidth()
-            .background(Color.LightGray)
-    ){
-        Row {
-            Box(
-                modifier = Modifier.fillMaxWidth()
-            ){
-                if (showBackButton) {
-                    Row (
-                        modifier = Modifier.fillMaxSize(),
-                    ){
-                        TextButton(
-                            onClick = onBack,
-                            modifier = Modifier
-                        ) {
-                            Text(
-                                "Back"
-                            )
-                        }
-                    }
+            .padding(3.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        if (showBackButton) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TextButton(
+                    onClick = onBack,
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                ) {
+                    Text("Kembali")
                 }
-            }
-            Box(
-                modifier = Modifier.fillMaxWidth()
-            ){
-                Icon(
-                    Icons.Filled.Notifications,
-                    contentDescription = null,
-                    modifier = Modifier.size(30.dp)
-                )
+                Spacer(modifier = Modifier.weight(2f))
             }
         }
+
         Text(
             text = judul,
             fontSize = 25.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.align(Alignment.Center)
         )
     }
 }
