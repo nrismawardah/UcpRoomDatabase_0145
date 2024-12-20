@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -17,7 +18,38 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.ucp2pam.ui.viewmodel.dosen.DosenEvent
+import com.example.ucp2pam.ui.viewmodel.dosen.DosenUiState
 import com.example.ucp2pam.ui.viewmodel.dosen.FormErrorStateDosen
+
+@Composable
+fun InsertBodyDs(
+    modifier: Modifier = Modifier,
+    onValueChange: (DosenEvent) -> Unit,
+    uiState: DosenUiState,
+    onClick: () -> Unit
+){
+    Column (
+        modifier = modifier
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        FormDosen(
+            dosenEvent = uiState.dosenEvent,
+            onValueChange = onValueChange,
+            errorState = uiState.isEntryValid,
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+        Button(
+            onClick = onClick,
+            modifier = Modifier
+                .fillMaxWidth()
+        ){
+            Text("Simpan")
+        }
+    }
+}
 
 @Composable
 fun FormDosen(
