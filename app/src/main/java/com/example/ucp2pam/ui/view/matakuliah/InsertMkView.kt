@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -30,6 +31,39 @@ import androidx.compose.ui.unit.dp
 import com.example.ucp2pam.ui.viewmodel.dosen.ReadDosenViewModel
 import com.example.ucp2pam.ui.viewmodel.matakuliah.FormErrorStateMk
 import com.example.ucp2pam.ui.viewmodel.matakuliah.MatakuliahEvent
+import com.example.ucp2pam.ui.viewmodel.matakuliah.MkUiState
+
+@Composable
+fun InsertBodyMk(
+    modifier: Modifier = Modifier,
+    onValueChange: (MatakuliahEvent) -> Unit,
+    uiState: MkUiState,
+    onClick: () -> Unit,
+    viewModel: ReadDosenViewModel
+){
+    Column (
+        modifier = modifier
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        FormMk(
+            matakuliahEvent = uiState.matakuliahEvent,
+            onValueChange = onValueChange,
+            errorState = uiState.isEntryValid,
+            viewModel = viewModel,
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+        Button(
+            onClick = onClick,
+            modifier = Modifier
+                .fillMaxWidth()
+        ){
+            Text("Simpan")
+        }
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
