@@ -67,7 +67,7 @@ fun InsertDosenView(
             TopAppBar(
                 onBack = onBack,
                 showBackButton = true,
-                judul = "Tambah Mahasiswa",
+                judul = "Tambah Matakuliah",
                 modifier = Modifier
             )
             InsertBodyDs(
