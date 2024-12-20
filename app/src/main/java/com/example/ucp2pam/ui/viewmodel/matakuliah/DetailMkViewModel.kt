@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ucp2pam.data.entity.Matakuliah
 import com.example.ucp2pam.repository.RepositoryMk
-import com.example.ucp2pam.ui.navigasi.DestinasiDetailMk
+import com.example.ucp2pam.ui.navigasi.DetailMk
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +21,7 @@ class DetailMkViewModel (
     private val repositoryMk: RepositoryMk,
 
     ) : ViewModel() {
-    private val kodeMk: String = checkNotNull(savedStateHandle[DestinasiDetailMk.KodeMk])
+    private val kodeMk: String = checkNotNull(savedStateHandle[DetailMk.KodeMk])
 
     val detailMkUiState: StateFlow<DetailMkUiState> = repositoryMk.getMk(kodeMk)
         .filterNotNull()
