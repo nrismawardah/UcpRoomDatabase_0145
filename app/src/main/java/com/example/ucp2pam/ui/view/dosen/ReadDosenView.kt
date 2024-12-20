@@ -46,6 +46,7 @@ import kotlinx.coroutines.launch
 fun ReadDosenView (
     viewModel: ReadDosenViewModel = viewModel (factory = PenyediaViewModel. Factory),
     onAddMDs: () -> Unit = { },
+    onBack: () -> Unit,
     onDetailClick: (String) -> Unit = { },
     modifier: Modifier = Modifier
 ) {
@@ -58,7 +59,7 @@ fun ReadDosenView (
             TopAppBar(
                 judul = "Daftar Dosen",
                 showBackButton = false,
-                onBack = { },
+                onBack = onBack,
                 modifier = modifier
             )
         },

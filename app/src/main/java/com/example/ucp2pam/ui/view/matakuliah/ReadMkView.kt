@@ -45,6 +45,7 @@ import kotlinx.coroutines.launch
 fun ReadMkView (
     viewModel: ReadMkViewModel = viewModel (factory = PenyediaViewModel. Factory),
     onAddMk: () -> Unit = { },
+    onBack: () -> Unit,
     onDetailClick: (String) -> Unit = { },
     modifier: Modifier = Modifier
 ) {
@@ -57,7 +58,7 @@ fun ReadMkView (
             TopAppBar(
                 judul = "Daftar Matakuliah",
                 showBackButton = false,
-                onBack = { },
+                onBack = onBack,
                 modifier = modifier
             )
         },
@@ -69,7 +70,7 @@ fun ReadMkView (
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Tambah Mahasiswa",
+                    contentDescription = "Tambah Matakuliah",
                 )
             }
         }
