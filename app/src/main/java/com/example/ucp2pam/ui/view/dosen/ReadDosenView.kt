@@ -37,10 +37,15 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ucp2pam.data.entity.Dosen
 import com.example.ucp2pam.ui.customwidget.TopAppBar
+import com.example.ucp2pam.ui.navigasi.AlamatNavigasi
 import com.example.ucp2pam.ui.viewmodel.PenyediaViewModel
 import com.example.ucp2pam.ui.viewmodel.dosen.ReadDosenUiState
 import com.example.ucp2pam.ui.viewmodel.dosen.ReadDosenViewModel
 import kotlinx.coroutines.launch
+
+object ReadDosen : AlamatNavigasi {
+    override val route: String = "read_dosen"
+}
 
 @Composable
 fun ReadDosenView (

@@ -27,12 +27,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ucp2pam.ui.customwidget.TopAppBar
+import com.example.ucp2pam.ui.navigasi.AlamatNavigasi
 import com.example.ucp2pam.ui.viewmodel.PenyediaViewModel
 import com.example.ucp2pam.ui.viewmodel.dosen.DosenEvent
 import com.example.ucp2pam.ui.viewmodel.dosen.DosenUiState
 import com.example.ucp2pam.ui.viewmodel.dosen.FormErrorStateDosen
 import com.example.ucp2pam.ui.viewmodel.dosen.InsertDosenViewModel
 import kotlinx.coroutines.launch
+
+object InsertDosen : AlamatNavigasi {
+    override val route: String = "insert_dosen"
+}
 
 @Composable
 fun InsertDosenView(

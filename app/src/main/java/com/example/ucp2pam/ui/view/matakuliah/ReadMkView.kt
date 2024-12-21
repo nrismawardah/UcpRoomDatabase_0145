@@ -36,10 +36,15 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ucp2pam.data.entity.Matakuliah
 import com.example.ucp2pam.ui.customwidget.TopAppBar
+import com.example.ucp2pam.ui.navigasi.AlamatNavigasi
 import com.example.ucp2pam.ui.viewmodel.PenyediaViewModel
 import com.example.ucp2pam.ui.viewmodel.matakuliah.ReadMkUiState
 import com.example.ucp2pam.ui.viewmodel.matakuliah.ReadMkViewModel
 import kotlinx.coroutines.launch
+
+object ReadMk : AlamatNavigasi {
+    override val route: String = "read_mk"
+}
 
 @Composable
 fun ReadMkView (

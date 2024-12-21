@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ucp2pam.ui.customwidget.TopAppBar
+import com.example.ucp2pam.ui.navigasi.AlamatNavigasi
 import com.example.ucp2pam.ui.viewmodel.PenyediaViewModel
 import com.example.ucp2pam.ui.viewmodel.dosen.ReadDosenViewModel
 import com.example.ucp2pam.ui.viewmodel.matakuliah.UpdateMkViewModel
@@ -23,14 +24,16 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+object UpdateMk : AlamatNavigasi {
+    override val route: String = "update_mk"
+}
+
 @Composable
 fun UpdateMkView(
     onBack: () -> Unit,
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: UpdateMkViewModel = viewModel(factory = PenyediaViewModel.Factory),
-    dosenViewModel: ReadDosenViewModel = viewModel()
-
 ){
     val uiState = viewModel.updateMkUIState
     val snackbarHostState = remember { SnackbarHostState() }
@@ -84,7 +87,6 @@ fun UpdateMkView(
                         }
                     }
                 },
-                viewModel = dosenViewModel
             )
         }
     }
