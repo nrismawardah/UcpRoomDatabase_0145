@@ -73,12 +73,14 @@ fun ReadMkView (
             FloatingActionButton(
                 onClick = onAddMk,
                 shape = MaterialTheme.shapes.medium,
+                containerColor = Color(0xFF102751),
                 modifier = Modifier
                     .padding(15.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Tambah Matakuliah",
+                    tint = Color.White
                 )
             }
         }
