@@ -1,7 +1,9 @@
 package com.example.ucp2pam.ui.view.matakuliah
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +14,6 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -56,8 +57,8 @@ fun DetailMkView (
     Scaffold (
         modifier= Modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .padding(top = 18.dp),
+            .padding(15.dp),
+            //.padding(top = 18.dp),
         topBar = {
             TopAppBar (
                 judul = "Detail Matakuliah",
@@ -65,7 +66,7 @@ fun DetailMkView (
                 onNotificationClick = {},
                 onBack = onBack,
                 modifier = modifier
-                    .offset(y = (-30).dp)
+                    .offset(y = (-10).dp)
             )
         },
         floatingActionButton = {
@@ -74,11 +75,13 @@ fun DetailMkView (
                     onEditClick(viewModel.detailMkUiState.value.detailMkUiEvent.kodeMK)
                 },
                 shape = MaterialTheme.shapes.medium,
+                containerColor = Color(0xFF102751),
                 modifier = Modifier.padding(16.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Edit,
                     contentDescription = "Edit Matakuliah",
+                    tint = Color.White
                 )
             }
         }
@@ -86,7 +89,9 @@ fun DetailMkView (
         val detailUiState by viewModel.detailMkUiState.collectAsState()
 
         BodyDetailMk(
-            modifier = Modifier.padding(innerPadding),
+            modifier = Modifier
+                .padding(innerPadding)
+                .offset(y = (-50).dp),
             detailUiState = detailUiState,
             onDeleteClick = {
                 viewModel.deleteMk()
@@ -128,7 +133,11 @@ fun BodyDetailMk (
                     onClick = {
                         deleteConfirmationRequired = true
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF102751),
+                        contentColor = Color.White
+                    )
                 ) {
                     Text(text = "Delete")
                 }
@@ -166,14 +175,14 @@ fun ItemDetailMk (
 ){
     Card (
         modifier = modifier
-            .fillMaxWidth (),
-        colors = CardDefaults.cardColors (
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            .fillMaxWidth(),
+        colors = androidx.compose.material3.CardDefaults.cardColors(
+            containerColor = Color(0xFFDBE8FC)
         )
     ){
         Column (
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier
+                .padding(16.dp)
         ){
             ComponentDetailMk (judul = "Kode Matakuliah", isinya = matakuliah. kodeMK)
             Spacer (modifier = Modifier.padding(4.dp))
@@ -215,22 +224,38 @@ fun ComponentDetailMk (
 }
 
 @Composable
-private fun DeleteConfirmationDialog (
-    onDeleteConfirm: () -> Unit, onDeleteCancel: () -> Unit, modifier: Modifier =
-        Modifier
+private fun DeleteConfirmationDialog(
+    onDeleteConfirm: () -> Unit,
+    onDeleteCancel: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    AlertDialog(onDismissRequest = { /* Do nothing */ },
-        title = { Text("Delete Data") },
-        text = { Text("Apakah anda yakin ingin menghapus data?") },
+    AlertDialog(
+        onDismissRequest = { /* Do nothing */ },
+        title = {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Delete Data")
+            }
+        },
+        text = {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Apakah anda yakin ingin menghapus data?")
+            }
+        },
         modifier = modifier,
         dismissButton = {
             TextButton(onClick = onDeleteCancel) {
-                Text(text = "Cancel")
+                Text(text = "Cancel", color = Color.Black)
             }
         },
         confirmButton = {
             TextButton(onClick = onDeleteConfirm) {
-                Text(text = "Yes")
+                Text(text = "Yes", color = Color.Black)
             }
         }
     )
