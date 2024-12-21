@@ -12,6 +12,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -36,7 +37,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2pam.Ucp2App
 import com.example.ucp2pam.ui.customwidget.TopAppBar
+import com.example.ucp2pam.ui.navigasi.AlamatNavigasi
 import com.example.ucp2pam.ui.viewmodel.PenyediaViewModel
 import com.example.ucp2pam.ui.viewmodel.dosen.ReadDosenViewModel
 import com.example.ucp2pam.ui.viewmodel.matakuliah.FormErrorStateMk
@@ -45,13 +48,16 @@ import com.example.ucp2pam.ui.viewmodel.matakuliah.MatakuliahEvent
 import com.example.ucp2pam.ui.viewmodel.matakuliah.MkUiState
 import kotlinx.coroutines.launch
 
+object InsertMk : AlamatNavigasi{
+    override val route: String = "insert_mk"
+}
+
 @Composable
 fun InsertMkView(
     onBack: () -> Unit,
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: InsertMkViewModel = viewModel(factory = PenyediaViewModel.Factory),
-    dosenViewModel: ReadDosenViewModel = viewModel()
+    viewModel: InsertMkViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ){
     val uiState = viewModel.uiState
     val snackbarHostState = remember { SnackbarHostState() }
@@ -74,7 +80,7 @@ fun InsertMkView(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .padding(16.dp)
+                .padding(5.dp)
         ){
             TopAppBar(
                 onBack = onBack,
@@ -91,7 +97,6 @@ fun InsertMkView(
                     viewModel.saveDataMk()
                     onNavigate()
                 },
-                viewModel = dosenViewModel
             )
         }
     }
@@ -103,7 +108,6 @@ fun InsertBodyMk(
     onValueChange: (MatakuliahEvent) -> Unit,
     uiState: MkUiState,
     onClick: () -> Unit,
-    viewModel: ReadDosenViewModel
 ){
     Column (
         modifier = modifier
@@ -115,7 +119,6 @@ fun InsertBodyMk(
             matakuliahEvent = uiState.matakuliahEvent,
             onValueChange = onValueChange,
             errorState = uiState.isEntryValid,
-            viewModel = viewModel,
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -135,12 +138,12 @@ fun FormMk(
     matakuliahEvent: MatakuliahEvent = MatakuliahEvent(),
     onValueChange: (MatakuliahEvent) -> Unit = {},
     errorState: FormErrorStateMk = FormErrorStateMk(),
-    viewModel: ReadDosenViewModel,
+    ReadDosenViewModel: ReadDosenViewModel = viewModel(factory = PenyediaViewModel.Factory),
     modifier: Modifier = Modifier
 ){
-    val jenisMk = listOf("Pemrograman", "Database", "Jaringan", "UI/UX")
+    val jenisMk = listOf("Wajib", "Pilihan")
     val semesterMk = listOf("Ganjil", "Genap")
-    val dosenUiState by viewModel.readDosenUiState.collectAsState()
+    val dosenUiState by ReadDosenViewModel.readDosenUiState.collectAsState()
     var expanded by remember { mutableStateOf(false) }
 
     Column (
@@ -155,7 +158,7 @@ fun FormMk(
             },
             label = { Text("Kode") },
             isError = errorState.kodeMk !=null,
-            placeholder = { Text("Masukkan Kode") },
+            placeholder = { Text("Masukkan Kode Matakuliah") },
         )
         Text(
             text = errorState.kodeMk ?: "",
@@ -169,7 +172,7 @@ fun FormMk(
             },
             label = { Text("Nama") },
             isError = errorState.namaMK !=null,
-            placeholder = { Text("Masukkan Nama") },
+            placeholder = { Text("Masukkan Nama Matakuliah") },
         )
         Text(
             text = errorState.namaMK ?: "",
@@ -183,7 +186,7 @@ fun FormMk(
             },
             label = { Text("SKS") },
             isError = errorState.sksMK !=null,
-            placeholder = { Text("Masukkan SKS") },
+            placeholder = { Text("Masukkan SKS Matakuliah") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
         Text(
@@ -242,45 +245,69 @@ fun FormMk(
                 }
             }
         }
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded }
-        ) {
-            OutlinedTextField(
-                modifier = modifier.fillMaxWidth(),
-                value = matakuliahEvent.dosenMK,
-                onValueChange = { },
-                label = { Text("Dosen Pengampu") },
-                isError = errorState.dosenMK != null,
-                placeholder = { Text("Pilih Dosen Pengampu") },
-                readOnly = true,
+        DropDownDosen(
+            judul = "Pilih Dosen Pengampu",
+            options = dosenUiState.listDosen.map { it.nama },
+            selectedOption = matakuliahEvent.dosenMK,
+            onOptionSelected = {
+                selectedDosen -> onValueChange(matakuliahEvent.copy(dosenMK = selectedDosen))
+            },
+            isError = errorState.dosenMK != null,
+            errorMessage = errorState.dosenMK
+        )
+    }
+}
 
-                trailingIcon = {
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DropDownDosen(
+    judul: String,
+    options: List<String>,
+    selectedOption: String,
+    onOptionSelected: (String) -> Unit,
+    isError: Boolean = false,
+    errorMessage: String? = null
+){
+    var expanded by remember { mutableStateOf(false) }
+    var currentSelection by remember { mutableStateOf(selectedOption) }
+
+    Column {
+        OutlinedTextField(
+            value = currentSelection,
+            onValueChange = {},
+            readOnly = true,
+            label = { Text(judul) },
+            trailingIcon = {
+                androidx.compose.material3.IconButton(onClick = {expanded = !expanded}) {
                     Icon(
-                        Icons.Filled.ArrowDropDown,
+                        imageVector = if (expanded) Icons.Default.ArrowDropDown else Icons.Default.ArrowDropDown,
                         contentDescription = null
                     )
                 }
-            )
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
-                dosenUiState.listDosen.forEach { dosen ->
-                    DropdownMenuItem(
-                        text = { Text(dosen.nama) },
-                        onClick = {
-                            onValueChange(matakuliahEvent.copy(dosenMK = dosen.nama)
-                            )
-                            expanded = false
-                        }
-                    )
-                }
+            },
+            modifier = Modifier.fillMaxWidth(),
+            isError = isError
+        )
+        DropdownMenu (
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+        ){
+            options.forEach { option ->
+                DropdownMenuItem(
+                    text = { Text(option) },
+                    onClick = {
+                        currentSelection = option
+                        onOptionSelected(option)
+                        expanded = false
+                    }
+                )
             }
         }
-        Text(
-            text = errorState.dosenMK ?: "",
-            color = Color.Red
-        )
+        if (isError && errorMessage != null){
+            Text(
+                text = errorMessage,
+                color = Color.Red
+            )
+        }
     }
 }

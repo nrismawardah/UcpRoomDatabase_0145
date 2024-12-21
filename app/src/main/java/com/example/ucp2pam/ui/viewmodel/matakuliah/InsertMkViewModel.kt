@@ -7,9 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ucp2pam.data.entity.Matakuliah
 import com.example.ucp2pam.repository.RepositoryMk
+import com.example.ucp2pam.ui.navigasi.DetailMk
 import kotlinx.coroutines.launch
 
-class InsertMkViewModel (private val repositoryMk: RepositoryMk) : ViewModel() {
+class InsertMkViewModel (
+    private val repositoryMk: RepositoryMk) : ViewModel()
+{
 
     var uiState by mutableStateOf(MkUiState())
 
