@@ -73,7 +73,7 @@ fun InsertDosenView(
                 onBack = onBack,
                 showBackButton = true,
                 onNotificationClick = {},
-                judul = "Tambah Matakuliah",
+                judul = "Tambah Dosen",
                 modifier = Modifier
                     .offset(y = (-10).dp)
             )
@@ -114,7 +114,11 @@ fun InsertBodyDs(
         Button(
             onClick = onClick,
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF102751),
+                contentColor = Color.White
+            )
         ){
             Text("Simpan")
         }

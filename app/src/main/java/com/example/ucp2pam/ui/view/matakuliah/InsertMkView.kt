@@ -128,6 +128,12 @@ fun InsertBodyMk(
             onClick = onClick,
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(20.dp),
+            colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF102751),
+                contentColor = Color.White
+            )
+
         ){
             Text("Simpan")
         }
