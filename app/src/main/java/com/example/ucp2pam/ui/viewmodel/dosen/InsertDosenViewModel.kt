@@ -9,7 +9,9 @@ import com.example.ucp2pam.data.entity.Dosen
 import com.example.ucp2pam.repository.RepositoryDosen
 import kotlinx.coroutines.launch
 
-class InsertDosenViewModel (private val repositoryDosen: RepositoryDosen) : ViewModel() {
+class InsertDosenViewModel (
+    private val repositoryDosen: RepositoryDosen) : ViewModel()
+{
 
     var uiState by mutableStateOf(DosenUiState())
 
