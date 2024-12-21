@@ -65,14 +65,14 @@ fun UpdateMkView(
                 onBack = onBack,
                 onNotificationClick = {},
                 modifier = modifier
-                    .offset(y = (-40).dp)
+                    .offset(y = (-10).dp)
             )
         }
     ){ padding ->
         Column (
             modifier= Modifier
                 .fillMaxSize()
-                .padding(padding)
+                .padding(top = 50.dp)
                 .padding(15.dp)
         ){
             InsertBodyMk(
