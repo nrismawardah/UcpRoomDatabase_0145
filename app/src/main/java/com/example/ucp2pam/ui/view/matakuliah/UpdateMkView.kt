@@ -72,7 +72,7 @@ fun UpdateMkView(
         Column (
             modifier= Modifier
                 .fillMaxSize()
-                .padding(top = 50.dp)
+                .padding(top = 130.dp)
                 .padding(15.dp)
         ){
             InsertBodyMk(
