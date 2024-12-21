@@ -1,63 +1,85 @@
 package com.example.ucp2pam.ui.customwidget
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
 
 @Composable
 fun TopAppBar(
     onBack: () -> Unit,
+    onNotificationClick: () -> Unit,
     showBackButton: Boolean = true,
     judul: String,
     modifier: Modifier = Modifier
 ) {
-    Box(
+    Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(3.dp),
-        contentAlignment = Alignment.Center
+            .background(Color(0xFF102751))
     ) {
-        if (showBackButton) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                TextButton(
-                    onClick = onBack,
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                ) {
-                    Text("Kembali")
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (showBackButton) {
+                Row (
+                    verticalAlignment = Alignment.CenterVertically
+                ){
+                    IconButton(onClick = onBack) {
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "Kembali",
+                            tint = Color.White
+                        )
+                    }
+                    Text(
+                        text = "Kembali",
+                        fontSize = 16.sp,
+                        color = Color.White,
+                        modifier = Modifier.padding(start = 4.dp)
+                    )
                 }
-                Spacer(modifier = Modifier.weight(2f))
+            } else {
+                Spacer(modifier = Modifier.size(48.dp))
+            }
+            IconButton(onClick = onNotificationClick) {
+                Icon(
+                    imageVector = Icons.Filled.Notifications,
+                    contentDescription = "Notifikasi",
+                    tint = Color.White
+                )
             }
         }
-
         Text(
             text = judul,
-            fontSize = 25.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.Center)
+            fontSize = 22.sp,
+            fontFamily = FontFamily.Serif,
+            color = Color.White,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 15.dp)
+                .align(Alignment.CenterHorizontally),
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center
         )
     }
 }

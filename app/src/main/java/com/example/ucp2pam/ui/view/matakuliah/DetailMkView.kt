@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
@@ -61,8 +62,10 @@ fun DetailMkView (
             TopAppBar (
                 judul = "Detail Matakuliah",
                 showBackButton = true,
+                onNotificationClick = {},
                 onBack = onBack,
                 modifier = modifier
+                    .offset(y = (-30).dp)
             )
         },
         floatingActionButton = {

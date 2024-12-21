@@ -57,21 +57,22 @@ fun ReadMkView (
     Scaffold(
         modifier= Modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .padding(top = 18.dp),
+            .padding(15.dp),
         topBar = {
             TopAppBar(
                 judul = "Daftar Matakuliah",
-                showBackButton = false,
+                showBackButton = true,
                 onBack = onBack,
+                onNotificationClick = {},
                 modifier = modifier
+                    .padding(top = 40.dp)
             )
         },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = onAddMk,
                 shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(15.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,

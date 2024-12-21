@@ -2,6 +2,7 @@ package com.example.ucp2pam.ui.view.matakuliah
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
@@ -54,14 +55,17 @@ fun UpdateMkView(
         }
     }
     Scaffold (
-        modifier=modifier,
+        modifier = Modifier
+            .padding(15.dp),
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
                 judul = "Edit Matakuliah",
                 showBackButton = true,
                 onBack = onBack,
+                onNotificationClick = {},
                 modifier = modifier
+                    .offset(y = (-40).dp)
             )
         }
     ){ padding ->
@@ -69,7 +73,7 @@ fun UpdateMkView(
             modifier= Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .padding(5.dp)
+                .padding(15.dp)
         ){
             InsertBodyMk(
                 uiState = uiState,
@@ -86,7 +90,7 @@ fun UpdateMkView(
                             }
                         }
                     }
-                },
+                }
             )
         }
     }

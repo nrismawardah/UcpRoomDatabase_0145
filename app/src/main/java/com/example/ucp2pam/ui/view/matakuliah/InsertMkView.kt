@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -79,14 +80,15 @@ fun InsertMkView(
         Column (
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
-                .padding(5.dp)
+                .padding(15.dp)
         ){
             TopAppBar(
                 onBack = onBack,
+                onNotificationClick = {},
                 showBackButton = true,
                 judul = "Tambah Matakuliah",
                 modifier = Modifier
+                    .offset(y = (-10).dp)
             )
             InsertBodyMk(
                 uiState = uiState,

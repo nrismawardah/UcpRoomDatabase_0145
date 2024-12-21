@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -66,14 +67,15 @@ fun InsertDosenView(
         Column (
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
-                .padding(16.dp)
+                .padding(15.dp)
         ){
             TopAppBar(
                 onBack = onBack,
                 showBackButton = true,
+                onNotificationClick = {},
                 judul = "Tambah Matakuliah",
                 modifier = Modifier
+                    .offset(y = (-10).dp)
             )
             InsertBodyDs(
                 uiState = uiState,

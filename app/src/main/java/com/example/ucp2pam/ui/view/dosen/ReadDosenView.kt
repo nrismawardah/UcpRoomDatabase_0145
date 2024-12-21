@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -58,21 +59,23 @@ fun ReadDosenView (
     Scaffold(
         modifier= Modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .padding(top = 18.dp),
+            .padding(15.dp),
         topBar = {
             TopAppBar(
                 judul = "Daftar Dosen",
-                showBackButton = false,
+                showBackButton = true,
                 onBack = onBack,
+                onNotificationClick = {},
                 modifier = modifier
+                    .padding(top = 40.dp)
             )
         },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = onAddMDs,
                 shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier
+                    .padding(15.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
