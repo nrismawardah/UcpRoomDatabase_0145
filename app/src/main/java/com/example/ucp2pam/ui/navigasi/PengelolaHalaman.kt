@@ -60,6 +60,8 @@ fun PengelolaHalaman(
                     navController.navigate(InsertMk.route)
                 },
                 onDetailClick = { kodeMK ->
+                    navController.navigate("${DetailMk.route}/$kodeMK")
+                    println("PengelolaHalaman: kodeMk = $kodeMK")
                 }
             )
         }
