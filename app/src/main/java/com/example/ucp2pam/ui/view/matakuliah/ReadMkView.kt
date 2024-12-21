@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -72,7 +73,8 @@ fun ReadMkView (
             FloatingActionButton(
                 onClick = onAddMk,
                 shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(15.dp)
+                modifier = Modifier
+                    .padding(15.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -88,7 +90,9 @@ fun ReadMkView (
             onClick = {
                 onDetailClick(it)
             },
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .padding(innerPadding)
+                .padding(top = 8.dp)
         )
     }
 }
@@ -182,7 +186,10 @@ fun CardMk (
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(8.dp),
+        colors = androidx.compose.material3.CardDefaults.cardColors(
+            containerColor = Color(0xFFDBE8FC)
+        )
     ){
         Column (
             modifier = Modifier.padding(8.dp)
