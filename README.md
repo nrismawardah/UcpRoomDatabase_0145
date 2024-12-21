@@ -33,3 +33,7 @@
 9. Hapus
 
    <img width="239" alt="image" src="https://github.com/user-attachments/assets/18e08cab-b3d8-4dc9-b87c-1e1ccb627f29" /> <img width="239" alt="image" src="https://github.com/user-attachments/assets/954d74a5-4fd4-4de1-8fab-c08abd401dd1" /> *Tampilan saat data dihapus*
+
+Link video:
+
+https://drive.google.com/file/d/1PilCSsPSptrs2ObTnoYh2IF_9W_BLDeC/view?usp=drivesdk
